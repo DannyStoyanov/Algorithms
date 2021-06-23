@@ -16,7 +16,7 @@ void insertSorted(T* arr, T x, size_t size) {
         arr[i] = arr[i-1];
         --i;
     }
-    arr[i]=x;
+    arr[i] = x;
 }
 template <class T>
 void insertionSort(T* arr, size_t size) {
