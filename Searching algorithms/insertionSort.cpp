@@ -4,7 +4,7 @@ Properties:
 - In-place
 - Online
 - Time complexity: O(n^2) comparisons and swaps
-				   Adaptive: O(n) when nearly sorted
+- Adaptive: O(n) when nearly sorted
 - Auxilariary Space: O(1)
 */
 #include<iostream>
