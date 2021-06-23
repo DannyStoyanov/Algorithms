@@ -9,7 +9,8 @@ Properties:
 */
 #include<iostream>
 
-void insertSorted(int* arr, int x, size_t size) {
+template <class T>
+void insertSorted(T* arr, T x, size_t size) {
     size_t i = size;
     while(i > 0 && arr[i-1] > x) {
         arr[i] = arr[i-1];
@@ -17,7 +18,8 @@ void insertSorted(int* arr, int x, size_t size) {
     }
     arr[i]=x;
 }
-void insertionSort(int* arr, size_t size) {
+template <class T>
+void insertionSort(T* arr, size_t size) {
 	for (size_t i = 0; i < size; i++) {
 		insertSorted(arr, arr[i], i);
 	}
