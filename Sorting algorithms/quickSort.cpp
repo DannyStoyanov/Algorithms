@@ -8,7 +8,6 @@ Properties:
 - Auxilariary Space: O(n)
 */
 #include<iostream>
-#include "utilities.h"
 
 template <class T>
 int partition_hoare(T* array, int low, int high) {
