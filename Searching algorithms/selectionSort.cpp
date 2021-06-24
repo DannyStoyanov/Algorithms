@@ -58,6 +58,5 @@ void selectionSort(T* array, size_t size)
 }
 
 int main() {
-
     return 0;
 }
