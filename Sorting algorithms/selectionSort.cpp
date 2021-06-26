@@ -7,7 +7,7 @@ Properties:
 - Auxilariary Space: O(1)
 */
 #include<iostream>
-
+#include "utilities.h"
 // Swap values of two numbers, passed by address
 template <class T>
 void swap(T* a, T* b) {
@@ -19,7 +19,7 @@ void swap(T* a, T* b) {
 // Find the minimal element in an array
 // Returns pointer to that element
 template <class T>
-const T* minElementPointer(const T* array, size_t size) {
+const T* minElementPointer(const T* const array, const size_t size) {
     const T* min = array;
     for (size_t i = 1; i < size; ++i) {
         if (array[i] < *min)
@@ -31,14 +31,14 @@ const T* minElementPointer(const T* array, size_t size) {
 // Selection sort.
 // A simple and short implementation, using pointers
 template <class T>
-void selectionSortPointers(T* array, size_t size) {
+void selectionSortPointers(T* array, const size_t size) {
     for(size_t i = 0; i < size-1; ++i) {
         swap(array+i, array+(minElementPointer(array+i, size-i)-array));
     }
 }
 
 template <class T>
-const size_t minElementIndex(const T* array, size_t from, size_t to) {
+const size_t minElementIndex(const T* const array, const size_t from, const size_t to) {
     size_t min = from;
     for (size_t i = from+1; i < to; ++i) {
         if (array[i] < array[min])
@@ -49,7 +49,7 @@ const size_t minElementIndex(const T* array, size_t from, size_t to) {
 // Selection sort.
 // A simple implementation, without pointers
 template <class T>
-void selectionSort(T* array, size_t size)
+void selectionSort(T* array, const size_t size)
 {
     for(size_t i = 0; i < size-1; ++i) {
         size_t min = minElementIndex(array, i, size);
@@ -58,5 +58,13 @@ void selectionSort(T* array, size_t size)
 }
 
 int main() {
+    double arr[] = {4.2,5.1,6.9,2.1,3.9};
+    int size = sizeof(arr)/sizeof(arr[0]);
+    std::cout<<"Original array: ";
+    print<double>(arr,size);
+    selectionSort(arr,size);
+    std::cout<<std::endl;
+    std::cout<<"Sorted array: ";
+    print<double>(arr,size);
     return 0;
 }
