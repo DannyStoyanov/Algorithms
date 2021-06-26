@@ -10,7 +10,7 @@ Properties:
 #include<iostream>
 
 template <class T>
-void insertSorted(T* arr, T x, size_t size) {
+void insertSorted(T* const arr, T x, const size_t size) {
     size_t i = size;
     while(i > 0 && arr[i-1] > x) {
         arr[i] = arr[i-1];
@@ -19,7 +19,7 @@ void insertSorted(T* arr, T x, size_t size) {
     arr[i] = x;
 }
 template <class T>
-void insertionSort(T* arr, size_t size) {
+void insertionSort(T* const arr, const size_t size) {
 	for (size_t i = 0; i < size; i++) {
 		insertSorted(arr, arr[i], i);
 	}
