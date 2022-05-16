@@ -24,7 +24,3 @@ void insertionSort(T* const arr, const size_t size) {
 		insertSorted(arr, arr[i], i);
 	}
 }
-
-int main() {
-    return 0;
-}

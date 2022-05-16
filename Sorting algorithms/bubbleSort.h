@@ -33,7 +33,3 @@ void bubbleSort(T* array, size_t size) {
         ++sorted;         // update the size of already sorted part
     }while(changed);
 }
-
-int main() {
-    return 0;
-}

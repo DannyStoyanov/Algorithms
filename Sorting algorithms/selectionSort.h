@@ -7,7 +7,7 @@ Properties:
 - Auxilariary Space: O(1)
 */
 #include<iostream>
-#include "utilities.h"
+
 // Swap values of two numbers, passed by address
 template <class T>
 void swap(T* a, T* b) {
@@ -55,16 +55,4 @@ void selectionSort(T* array, const size_t size)
         size_t min = minElementIndex(array, i, size);
         swap(array+i, array+min);
     }
-}
-
-int main() {
-    double arr[] = {4.2,5.1,6.9,2.1,3.9};
-    int size = sizeof(arr)/sizeof(arr[0]);
-    std::cout<<"Original array: ";
-    print<double>(arr,size);
-    selectionSort(arr,size);
-    std::cout<<std::endl;
-    std::cout<<"Sorted array: ";
-    print<double>(arr,size);
-    return 0;
 }

@@ -50,7 +50,3 @@ void heapSort(std::vector<T>& array) {
         heapify(array, i, 0);          // Call max heapify on the reduced heap
     }
 }
-
-int main() {
-    return 0;
-}

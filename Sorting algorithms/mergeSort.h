@@ -50,7 +50,3 @@ void mergeSort(T* array, int size) {
     mergeSort(array+mid, size - mid);
     merge<T>(array, mid, array+mid, size - mid);
 }
-
-int main() {
-    return 0;
-}
