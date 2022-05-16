@@ -14,10 +14,3 @@ int kadane(int array[], size_t size) {
     }
     return tempMax;
 }
-
-int main() {
-    int arr[] = {2, -3, 1, -4, 5, 2, -1, 4, -3};
-    size_t size = sizeof(arr)/sizeof(arr[0]);
-    std::cout<<"Kadane: "<<kadane(arr, size);
-    return 0;
-}
