@@ -1,6 +1,10 @@
 #include <iostream>
 #include "mergeSort.h"
 
+// Given array of integers
+
+// Find min{ |a_i - a_j| : 0 <= i < j < n }
+
 std::pair<int, int> closestPair(int arr[], std::size_t size) {
     if(size == 0) {
         return std::make_pair(INT_MIN, INT_MAX);
