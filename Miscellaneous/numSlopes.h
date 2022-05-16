@@ -10,7 +10,7 @@ template <typename T>
 unsigned numSlopes(T* arr, std::size_t size) {
     unsigned res = 0;
     for (size_t i = 1; i < size; i++) {
-        if(arr[i] < arr[i-1]) {
+        if(arr[i] > arr[i-1]) {
             res++;
         }
     }
