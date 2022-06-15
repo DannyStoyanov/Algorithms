@@ -2,7 +2,7 @@
 
 int max_unsorted(int* arr, std::size_t size) {
     if (size <= 0) {
-        return -1;
+        return INT_MIN;
     }
     int max = arr[0];
     for (size_t i = 1; i < size; i++) {
