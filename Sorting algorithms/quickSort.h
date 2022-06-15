@@ -41,7 +41,3 @@ template <class T>
 void quickSort(T* array, int size) {
     quickSortHelper(array, 0, size-1);
 }
-
-int main() {
-    return 0;
-}
