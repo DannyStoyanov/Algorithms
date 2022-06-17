@@ -1,7 +1,5 @@
 #include <iostream>
 
-// l and h are indexes in {0, ..., n} where l<h
-
 template <typename T>
 int partitionHoare(T arr[], std::size_t low, std::size_t high) {
     T pivot = arr[low];
