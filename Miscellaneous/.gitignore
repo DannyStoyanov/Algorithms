@@ -47,4 +47,5 @@
 *.exe
 a.out
 main.cpp
+utilities.h
 mergeSort.h
