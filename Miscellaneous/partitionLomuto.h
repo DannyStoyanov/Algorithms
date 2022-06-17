@@ -1,7 +1,7 @@
 #include <iostream>
 
 template <typename T>
-int findIndex(T pivot, T* arr, std::size_t size) {
+int findIndex(T pivot, T arr[], std::size_t size) {
     for (std::size_t i = 0; i < size; i++) {
         if(arr[i] == pivot) {
             return i;
@@ -11,7 +11,7 @@ int findIndex(T pivot, T* arr, std::size_t size) {
 }
 
 template <typename T>
-int partitionLomuto(T* arr, std::size_t size, T pivot) {
+int partitionLomuto(T arr[], std::size_t size, T pivot) {
     std::size_t k = findIndex(pivot, arr, size);
     std::swap(arr[k], arr[size-1]);
     int pp = 0;

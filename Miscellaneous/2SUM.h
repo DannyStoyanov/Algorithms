@@ -2,7 +2,7 @@
 
 // Array must be sorted before using!
 
-bool twoSum(int* arr, int size, int sum) {
+bool twoSum(int arr[], int size, int sum) {
     int i=0;
     int j=size-1;
     while(i < j) {

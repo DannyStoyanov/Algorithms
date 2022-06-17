@@ -2,7 +2,7 @@
 
 // Array must be sorted before using!
 
-int binarySearch_iterative(int* arr, int size, int x) {
+int binarySearch_iterative(int arr[], int size, int x) {
     int left = 0;
     int right = size-1;
     while(left <= right) {
@@ -34,7 +34,7 @@ int binarySearch_rec_helper(int* arr, int x, int left, int right) {
     return binarySearch_rec_helper(arr, x, left, mid-1);
 }
 
-int binarySearch_rec(int* arr, int size, int x) {
+int binarySearch_rec(int arr[], int size, int x) {
     int left = 0;
     int right = size-1;
     return binarySearch_rec_helper(arr, x, left, right);

@@ -3,7 +3,7 @@
 // A Bitonic Sequence is a sequence of numbers that is 
 // first strictly increasing then after a point decreasing.
 
-int max_bitonic_helper(int* arr, int left, int right) {
+int max_bitonic_helper(int arr[], int left, int right) {
     if (left == right) {
         return arr[left];
     }
@@ -19,6 +19,6 @@ int max_bitonic_helper(int* arr, int left, int right) {
     }
 }
 
-int max_bitonic(int* arr, std::size_t size) {
+int max_bitonic(int arr[], std::size_t size) {
     return max_bitonic_helper(arr, 0, size-1);
 }

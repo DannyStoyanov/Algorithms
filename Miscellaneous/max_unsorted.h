@@ -1,6 +1,6 @@
 #include <iostream>
 
-int max_unsorted(int* arr, std::size_t size) {
+int max_unsorted(int arr[], std::size_t size) {
     if (size <= 0) {
         return INT_MIN;
     }
@@ -13,7 +13,7 @@ int max_unsorted(int* arr, std::size_t size) {
     return max;
 }
 
-int max_unsorted_rec(int* arr, std::size_t size) {
+int max_unsorted_rec(int arr[], std::size_t size) {
     if (size == 0) {
         return INT_MIN;
     }

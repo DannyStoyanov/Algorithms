@@ -11,7 +11,7 @@ Properties:
 #include<vector>
 
 template <class T>
-void merge(T* leftArr, int leftLen, T* rightArr, int rightLen) {
+void merge(T leftArr[], int leftLen, T rightArr[], int rightLen) {
     T* result = new T[leftLen + rightLen];
     if(!result) {
         return;
@@ -41,7 +41,7 @@ void merge(T* leftArr, int leftLen, T* rightArr, int rightLen) {
 }
 
 template <class T>
-void mergeSort(T* array, int size) {
+void mergeSort(T array[], int size) {
     if(size <= 1) {
         return;
     }
