@@ -3,6 +3,12 @@
 #include <queue>
 #include <assert.h>
 
+enum Color {
+    white,
+    gray,
+    black
+};
+
 class Graph {
     private:
 	    std::vector<std::vector<int> > adj;
@@ -11,7 +17,8 @@ class Graph {
 
         void DFS_helper(size_t start, std::vector<bool>& visited, std::vector<size_t>& result) const;
         void TopoSort_Tarjan_rec(size_t x, std::vector<size_t>& result, std::vector<size_t>& dist, std::vector<size_t>& color, std::vector<size_t>& path, size_t time) const;
-
+        void SCC_rec(std::vector<size_t>& set, size_t currentVertex, std::vector<Color>& color, std::vector<size_t>& dist, size_t time) const;
+        void SCC(std::vector<size_t>& l) const;
     public:
         Graph();
         Graph(size_t _V, bool _oriented);
@@ -23,6 +30,8 @@ class Graph {
         std::vector<size_t> DFS(size_t start) const;
         std::vector<size_t> TopoSort_Tarjan() const; // Tarjan's Topological Sorting algorithm
         std::vector<size_t> TopoSort_Kahn() const; // Kahn's Topologiacl Sorting algorithm
+        void SCC_Kosaraju() const;
+        Graph transpose() const;
 };
 
 Graph::Graph(): V(0), adj(0), oriented(false) {}
@@ -92,12 +101,6 @@ std::vector<size_t> Graph::DFS(size_t start) const {
 
 // Tarjan's Topological Sorting algorithm
 
-enum Color {
-    white,
-    gray,
-    black
-};
-
 void Graph::TopoSort_Tarjan_rec(size_t x, std::vector<size_t>& result, std::vector<size_t>& dist, std::vector<size_t>& color, std::vector<size_t>& path, size_t time) const {
     color[x] = gray;
     time++;
@@ -129,16 +132,6 @@ std::vector<size_t>  Graph::TopoSort_Tarjan() const {
     }
     reverse(result.begin(), result.end());
     return result;
-}
-
-
-
-// Need for testing:
-void printVector(std::vector<size_t> v) {
-    for (size_t i = 0; i < v.size(); i++) {
-        std::cout<<v[i]<<" ";
-    }
-    std::cout<<std::endl;
 }
 
 bool contains(std::vector<size_t>& vec, size_t x) {
@@ -196,4 +189,59 @@ std::vector<size_t> Graph::TopoSort_Kahn() const {
         return std::vector<size_t>(0);
     }
     return result;
+}
+
+void printSet(std::vector<size_t> set) {
+    for (size_t i = 0; i < set.size(); i++) {
+        std::cout<<set[i]<<" ";
+    }
+    std::cout<<std::endl;
+}
+
+void Graph::SCC_rec(std::vector<size_t>& set,  size_t currentVertex, std::vector<Color>& color, std::vector<size_t>& dist, size_t time) const {
+    color[currentVertex]=gray;
+    time++;
+    dist[currentVertex]=time;
+    addToSet(set, currentVertex);
+    for (size_t i = 0; i < adj[currentVertex].size(); i++) {
+        size_t neighbour=adj[currentVertex][i];
+        if(color[neighbour] == white) {
+            SCC_rec(set, neighbour, color, dist, time);
+        }
+    }
+    color[currentVertex]=black;
+    time++;
+}
+
+void Graph::SCC(std::vector<size_t>& l) const {
+    std::vector<size_t> set;
+    size_t time=0;
+    std::vector<Color> color(V);
+    std::vector<size_t> dist(V);
+    for (size_t i = 0; i < color.size(); i++) {
+        color[i] = white;
+    }
+    for (size_t i = 0; i < adj.size(); i++) {
+        if(color[l[i]] == white) {
+            set.clear();
+            SCC_rec(set, l[i], color, dist, time);
+            printSet(set);
+        }
+    }
+}
+
+Graph Graph::transpose() const {
+    Graph result(V, true);
+    for (int i = 0; i < adj.size(); i++) {
+        for (int j = 0; j < adj[i].size(); j++) {
+            result.addEdge(adj[i][j], i);
+        }
+    }
+    return result;
+}
+
+void Graph::SCC_Kosaraju() const {
+    std::vector<size_t> l=this->TopoSort_Tarjan();
+    Graph g=this->transpose();
+    g.SCC(l);
 }

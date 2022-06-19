@@ -3,6 +3,12 @@
 #include <queue>
 #include <assert.h>
 
+enum Color {
+    white,
+    gray,
+    black
+};
+
 class Graph {
     private:
 	    std::vector<std::vector<int> > adj;
@@ -11,7 +17,8 @@ class Graph {
 
         void DFS_helper(size_t start, std::vector<bool>& visited, std::vector<size_t>& result) const;
         void TopoSort_Tarjan_rec(size_t x, std::vector<size_t>& result, std::vector<size_t>& dist, std::vector<size_t>& color, std::vector<size_t>& path, size_t time) const;
-
+        void SCC_rec(std::vector<size_t>& set, size_t currentVertex, std::vector<Color>& color, std::vector<size_t>& dist, size_t time) const;
+        void SCC(std::vector<size_t>& l) const;
     public:
         Graph();
         Graph(size_t _V, bool _oriented);
@@ -23,6 +30,8 @@ class Graph {
         std::vector<size_t> DFS(size_t start) const;
         std::vector<size_t> TopoSort_Tarjan() const; // Tarjan's Topological Sorting algorithm
         std::vector<size_t> TopoSort_Kahn() const; // Kahn's Topologiacl Sorting algorithm
+        void SCC_Kosaraju() const;
+        Graph transpose() const;
 };
 
 Graph::Graph(): V(0), adj(0), oriented(false) {}
