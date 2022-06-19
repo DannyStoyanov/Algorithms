@@ -10,6 +10,8 @@ class Graph {
 	    bool oriented;
 
         void DFS_helper(size_t start, std::vector<bool>& visited, std::vector<size_t>& result) const;
+        void TopoSort_Tarjan_rec(size_t x, std::vector<size_t>& result, std::vector<size_t>& dist, std::vector<size_t>& color, std::vector<size_t>& path, size_t time) const;
+
     public:
         Graph();
         Graph(size_t _V, bool _oriented);
@@ -19,8 +21,8 @@ class Graph {
 
         std::vector<size_t> BFS(size_t start) const;
         std::vector<size_t> DFS(size_t start) const;
-        std::vector<size_t> TopoSort() const; // Tarjan's Topological Sorting algorithm
-        void TopoSort_rec(size_t x, std::vector<size_t>& result, std::vector<size_t>& dist, std::vector<size_t>& color, std::vector<size_t>& path, size_t time) const;
+        std::vector<size_t> TopoSort_Tarjan() const; // Tarjan's Topological Sorting algorithm
+        std::vector<size_t> TopoSort_Kahn() const; // Kahn's Topologiacl Sorting algorithm
 };
 
 Graph::Graph(): V(0), adj(0), oriented(false) {}
@@ -45,6 +47,8 @@ void Graph::print() const {
     }
 }
 
+// Breadth First Search - BFS
+
 std::vector<size_t> Graph::BFS(size_t start) const {
     std::vector<size_t> result;
     std::vector<bool> visited(V, false);
@@ -66,6 +70,8 @@ std::vector<size_t> Graph::BFS(size_t start) const {
     return result;
 }
 
+// Depth First Search - DFS
+
 void Graph::DFS_helper(size_t start, std::vector<bool>& visited, std::vector<size_t>& result) const {
     visited[start] = true;
     result.push_back(start);
@@ -84,13 +90,15 @@ std::vector<size_t> Graph::DFS(size_t start) const {
     return result;
 }
 
+// Tarjan's Topological Sorting algorithm
+
 enum Color {
     white,
     gray,
     black
 };
 
-void Graph::TopoSort_rec(size_t x, std::vector<size_t>& result, std::vector<size_t>& dist, std::vector<size_t>& color, std::vector<size_t>& path, size_t time) const {
+void Graph::TopoSort_Tarjan_rec(size_t x, std::vector<size_t>& result, std::vector<size_t>& dist, std::vector<size_t>& color, std::vector<size_t>& path, size_t time) const {
     color[x] = gray;
     time++;
     dist[x] = time;
@@ -98,7 +106,7 @@ void Graph::TopoSort_rec(size_t x, std::vector<size_t>& result, std::vector<size
         size_t neighbour = adj[x][i];
         if(color[neighbour] == white) {
             path[neighbour] = x;
-            TopoSort_rec(neighbour, result, dist, color, path, time);
+            TopoSort_Tarjan_rec(neighbour, result, dist, color, path, time);
         }
     }
     color[x] = black;
@@ -106,7 +114,7 @@ void Graph::TopoSort_rec(size_t x, std::vector<size_t>& result, std::vector<size
     result.push_back(x);
 }
 
-std::vector<size_t>  Graph::TopoSort() const {
+std::vector<size_t>  Graph::TopoSort_Tarjan() const {
     assert(oriented == true);
     Color c = white;
     std::vector<size_t> result;
@@ -116,9 +124,13 @@ std::vector<size_t>  Graph::TopoSort() const {
     size_t time=0;
     for(size_t i=0; i < adj.size(); i++) {
         if(color[i] == white) {
-            TopoSort_rec(i, result, dist, color, path, time);
+            TopoSort_Tarjan_rec(i, result, dist, color, path, time);
         }
     }
     reverse(result.begin(), result.end());
     return result;
+}
+
+std::vector<size_t> Graph::TopoSort_Kahn() const {
+    
 }
