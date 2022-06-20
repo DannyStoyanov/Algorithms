@@ -15,12 +15,6 @@ void addToSet(std::vector<size_t>& set, size_t x) {
     }
 }
 
-enum Color {
-    white,
-    gray,
-    black
-};
-
 std::vector<size_t> Graph::TopoSort_Kahn() const {
     std::vector<size_t> set;
     std::vector<Color> color(V);
