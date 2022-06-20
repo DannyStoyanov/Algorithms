@@ -1,0 +1,16 @@
+# Miscellaneous algorithms
+
+## Famous algorithms and problems
+
+- Binary Search - O(logn)
+- Closest Pair 2D - O(nlogn)
+- Euclidean algorithm - O(n)
+- Kadane's algorithm (Maximum subarray problem) - O(n)
+- Maximum Length Bitonic Subarray - O(n)
+- Maximum element - O(n)
+- Second largest element - O(n)
+- Unique elements - (nlogn)
+- Mode - O(nlogn)
+- Count Strictly Increasing Subarrays (NumSlopes) - O(n)
+- Hoare partition - O(n)
+- Lomuto partition - O(n<sup>2</sup>)
