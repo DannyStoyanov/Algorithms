@@ -2,13 +2,7 @@
 
 // Tarjan's Topological Sorting algorithm
 
-enum Color {
-    white,
-    gray,
-    black
-};
-
-void Graph::TopoSort_Tarjan_rec(size_t x, std::vector<size_t>& result, std::vector<size_t>& dist, std::vector<size_t>& color, std::vector<size_t>& path, size_t time) const {
+void Graph::TopoSort_Tarjan_rec(size_t x, std::vector<size_t>& result, std::vector<size_t>& dist, std::vector<Color>& color, std::vector<size_t>& path, size_t time) const {
     color[x] = gray;
     time++;
     dist[x] = time;
@@ -28,7 +22,7 @@ std::vector<size_t>  Graph::TopoSort_Tarjan() const {
     assert(oriented == true);
     Color c = white;
     std::vector<size_t> result;
-    std::vector<size_t> color(V, c);
+    std::vector<Color> color(V, c);
     std::vector<size_t> dist(V, 0);
     std::vector<size_t> path(V, -1);
     size_t time=0;

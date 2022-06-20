@@ -16,7 +16,7 @@ class Graph {
 	    bool oriented;
 
         void DFS_helper(size_t start, std::vector<bool>& visited, std::vector<size_t>& result) const;
-        void TopoSort_Tarjan_rec(size_t x, std::vector<size_t>& result, std::vector<size_t>& dist, std::vector<size_t>& color, std::vector<size_t>& path, size_t time) const;
+        void TopoSort_Tarjan_rec(size_t x, std::vector<size_t>& result, std::vector<size_t>& dist, std::vector<Color>& color, std::vector<size_t>& path, size_t time) const;
         void SCC_rec(std::vector<size_t>& set, size_t currentVertex, std::vector<Color>& color, std::vector<size_t>& dist, size_t time) const;
         void SCC(std::vector<size_t>& l) const;
     public:
@@ -101,7 +101,7 @@ std::vector<size_t> Graph::DFS(size_t start) const {
 
 // Tarjan's Topological Sorting algorithm
 
-void Graph::TopoSort_Tarjan_rec(size_t x, std::vector<size_t>& result, std::vector<size_t>& dist, std::vector<size_t>& color, std::vector<size_t>& path, size_t time) const {
+void Graph::TopoSort_Tarjan_rec(size_t x, std::vector<size_t>& result, std::vector<size_t>& dist, std::vector<Color>& color, std::vector<size_t>& path, size_t time) const {
     color[x] = gray;
     time++;
     dist[x] = time;
@@ -121,7 +121,7 @@ std::vector<size_t>  Graph::TopoSort_Tarjan() const {
     assert(oriented == true);
     Color c = white;
     std::vector<size_t> result;
-    std::vector<size_t> color(V, c);
+    std::vector<Color> color(V, c);
     std::vector<size_t> dist(V, 0);
     std::vector<size_t> path(V, -1);
     size_t time=0;
