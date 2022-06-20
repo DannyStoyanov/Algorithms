@@ -2,7 +2,7 @@
 
 ## Famous algorithms and problems
 
-- Binary Search - O(logn)
+- Binary Search - O(logn) (the input must be sorted)
 - Closest Pair 2D - O(nlogn)
 - Euclidean algorithm - O(n)
 - Kadane's algorithm (Maximum subarray problem) - O(n)
@@ -14,3 +14,5 @@
 - Count Strictly Increasing Subarrays (NumSlopes) - O(n)
 - Hoare partition - O(n)
 - Lomuto partition - O(n<sup>2</sup>)
+- 2SUM - O(n) (the input must be sorted)
+- 3SUM - O(n<sup>2</sup>)
