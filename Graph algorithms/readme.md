@@ -9,5 +9,5 @@
 - Kosaraju's Strongly Connected Components (Kosaraju SCC) - O(n+m)
 - Detect Cycle in Directed Graph - O(n+m)
 
-// n - number of vertices, |V| = n
+// n - number of vertices, |V| = n <br>
 // m - number of edges, |E| = m
