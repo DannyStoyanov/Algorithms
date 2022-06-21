@@ -1,5 +1,9 @@
-#include <iostream>
 #include "Graph.h"
+
+// Detect Cycle in Directed Graph
+// Time complexity: O(n+m)
+// n - number of vertices, |V| = n
+// m - number of edges, |E| = m
 
 bool Graph::hasCycle_helper(size_t currentVertex, std::vector<bool>& visited, std::vector<bool>& stack) const {
     if(!visited[currentVertex]) {

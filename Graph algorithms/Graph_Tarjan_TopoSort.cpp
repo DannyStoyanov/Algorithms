@@ -1,6 +1,9 @@
 #include "Graph.h"
 
 // Tarjan's Topological Sorting algorithm
+// Time complexity: O(n+m)
+// n - number of vertices, |V| = n
+// m - number of edges, |E| = m
 
 void Graph::TopoSort_Tarjan_rec(size_t x, std::vector<size_t>& result, std::vector<size_t>& dist, std::vector<Color>& color, std::vector<size_t>& path, size_t time) const {
     color[x] = gray;

@@ -1,5 +1,10 @@
 #include "Graph.h"
 
+// Kahn's Topological Sorting algorithm
+// Time complexity: O(n+m)
+// n - number of vertices, |V| = n
+// m - number of edges, |E| = m
+
 bool contains(std::vector<size_t>& vec, size_t x) {
     for(std::vector<size_t>::iterator it = vec.begin(); it != vec.end(); it++) {
         if(*it == x) {
@@ -28,7 +33,7 @@ std::vector<size_t> Graph::TopoSort_Kahn() const {
     }
     for(size_t currentVertex=0; currentVertex < adj.size(); currentVertex++) {
         if(arr[currentVertex] == 0) {
-            addToSet(set, currentVertex);
+            addToSet(set, currentVertex);  // first add source vertices
             color[currentVertex] = gray;
         }
         else {
@@ -36,9 +41,9 @@ std::vector<size_t> Graph::TopoSort_Kahn() const {
         }
     }
     size_t k=0;
-    while(!set.empty()) {
-        size_t currentVertex = set.back();
-        set.pop_back();
+    while(!set.empty()) {                  // then we proceed through the dag,
+        size_t currentVertex = set.back(); // contrary to Tarjan's algorithm, where we 
+        set.pop_back();                    // start from the end nodes and loop backwards
         result[k]=currentVertex;
         k++;
         for(size_t i=0; i < adj[currentVertex].size(); i++) {
@@ -52,7 +57,7 @@ std::vector<size_t> Graph::TopoSort_Kahn() const {
         color[currentVertex] = black;
     }
     if(k<V) {
-        return std::vector<size_t>(0); // not a DAG
+        return std::vector<size_t>(0); // condition to determine whether the graph is DAG
     }
     return result;
 }

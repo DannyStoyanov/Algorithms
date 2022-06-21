@@ -1,6 +1,9 @@
 #include "Graph.h"
 
-// Depth First Search - DFS
+// Depth First Search (DFS) algorithm
+// Time complexity: O(n+m)
+// n - number of vertices, |V| = n
+// m - number of edges, |E| = m
 
 void Graph::DFS_helper(size_t start, std::vector<bool>& visited, std::vector<size_t>& result) const {
     visited[start] = true;

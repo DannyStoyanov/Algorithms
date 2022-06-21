@@ -1,6 +1,9 @@
 #include "Graph.h"
 
-// Breadth First Search - BFS
+// Breadth First Search (BFS) algorithm
+// Time complexity: O(n+m)
+// n - number of vertices, |V| = n
+// m - number of edges, |E| = m
 
 std::vector<size_t> Graph::BFS(size_t start) const {
     std::vector<size_t> result;
