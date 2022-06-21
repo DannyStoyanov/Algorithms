@@ -19,6 +19,7 @@ class Graph {
         void TopoSort_Tarjan_rec(size_t x, std::vector<size_t>& result, std::vector<size_t>& dist, std::vector<Color>& color, std::vector<size_t>& path, size_t time) const;
         void SCC_rec(std::vector<size_t>& set, size_t currentVertex, std::vector<Color>& color, std::vector<size_t>& dist, size_t time) const;
         void SCC(std::vector<size_t>& l) const;
+        bool hasCycle_helper(size_t currentVertex, std::vector<bool>& visited, std::vector<bool>& stack) const;
     public:
         Graph();
         Graph(size_t _V, bool _oriented);
@@ -32,6 +33,7 @@ class Graph {
         std::vector<size_t> TopoSort_Kahn() const; // Kahn's Topologiacl Sorting algorithm
         void SCC_Kosaraju() const;
         Graph transpose() const;
+        bool hasCycle() const;
 };
 
 Graph::Graph(): V(0), adj(0), oriented(false) {}
@@ -244,4 +246,34 @@ void Graph::SCC_Kosaraju() const {
     std::vector<size_t> l=this->TopoSort_Tarjan();
     Graph g=this->transpose();
     g.SCC(l);
+}
+
+bool Graph::hasCycle_helper(size_t currentVertex, std::vector<bool>& visited, std::vector<bool>& stack) const {
+    if(!visited[currentVertex]) {
+        visited[currentVertex] = true;
+        stack[currentVertex] = true;
+        for (size_t i = 0; i < adj[currentVertex].size(); i++) {
+            size_t neighbour = adj[currentVertex][i];
+            if(!visited[neighbour] &&  hasCycle_helper(neighbour, visited, stack)) {
+                return true;
+            }
+            else if(stack[neighbour]) {
+                    return true;
+            }
+        }
+    }
+    stack[currentVertex] = false;
+    return false;
+}
+
+bool Graph::hasCycle() const {
+    assert(this->oriented == true);
+    std::vector<bool> visited(V, false);
+    std::vector<bool> stack(V, false);
+    for (size_t i = 0; i < V; i++) {
+        if(!visited[i] && hasCycle_helper(i, visited, stack)) {
+            return true;
+        }
+    }
+    return false;
 }

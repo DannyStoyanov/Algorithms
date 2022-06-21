@@ -7,3 +7,7 @@
 - Tarjan's Topological Sorting
 - Kahn's Topological Sorting
 - Kosaraju's Strongly Connected Components - Kosaraju SCC
+- Detect Cycle in Directed Graph - O(n+m)
+
+// n - number of vertices
+// m - number of edges

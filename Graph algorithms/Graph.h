@@ -19,6 +19,7 @@ class Graph {
         void TopoSort_Tarjan_rec(size_t x, std::vector<size_t>& result, std::vector<size_t>& dist, std::vector<Color>& color, std::vector<size_t>& path, size_t time) const;
         void SCC_rec(std::vector<size_t>& set, size_t currentVertex, std::vector<Color>& color, std::vector<size_t>& dist, size_t time) const;
         void SCC(std::vector<size_t>& l) const;
+        bool hasCycle_helper(size_t currentVertex, std::vector<bool>& visited, std::vector<bool>& stack) const;
     public:
         Graph();
         Graph(size_t _V, bool _oriented);
@@ -32,6 +33,7 @@ class Graph {
         std::vector<size_t> TopoSort_Kahn() const; // Kahn's Topologiacl Sorting algorithm
         void SCC_Kosaraju() const;
         Graph transpose() const;
+        bool hasCycle() const;
 };
 
 Graph::Graph(): V(0), adj(0), oriented(false) {}
