@@ -5,7 +5,7 @@
 // n - number of vertices, |V| = n
 // m - number of edges, |E| = m
 
-// Uses 2 DFS calls contrary to Kahn's algorithm (1 DFS call)
+// Uses 2 DFS calls contrary to Tarjan's algorithm (1 DFS call)
 
 void printSet(std::vector<size_t> set) {
     for (size_t i = 0; i < set.size(); i++) {

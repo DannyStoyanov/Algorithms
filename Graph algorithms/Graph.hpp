@@ -2,6 +2,7 @@
 #include <vector>
 #include <queue>
 #include <assert.h>
+#include <stack>
 
 enum Color {
     white,
@@ -11,7 +12,7 @@ enum Color {
 
 class Graph {
     private:
-	    std::vector<std::vector<int> > adj;
+	    std::vector<std::vector<size_t> > adj;
 	    std::size_t V;
 	    bool oriented;
 
@@ -20,6 +21,7 @@ class Graph {
         void SCC_rec(std::vector<size_t>& set, size_t currentVertex, std::vector<Color>& color, std::vector<size_t>& dist, size_t time) const;
         void SCC(std::vector<size_t>& l) const;
         bool hasCycle_helper(size_t currentVertex, std::vector<bool>& visited, std::vector<bool>& stack) const;
+        void SCC_Tarjan_helper(size_t currentVertex, std::vector<size_t>& disc, std::vector<size_t>& low, std::stack<size_t>& st, std::vector<bool>& stackMember) const;
     public:
         Graph();
         Graph(size_t _V, bool _oriented);
@@ -32,6 +34,7 @@ class Graph {
         std::vector<size_t> TopoSort_Tarjan() const; // Tarjan's Topological Sorting algorithm
         std::vector<size_t> TopoSort_Kahn() const; // Kahn's Topologiacl Sorting algorithm
         void SCC_Kosaraju() const;
+        void SCC_Tarjan() const;
         Graph transpose() const;
         bool hasCycle() const;
 };
@@ -276,4 +279,47 @@ bool Graph::hasCycle() const {
         }
     }
     return false;
+}
+
+void Graph::SCC_Tarjan_helper(size_t currentVertex, std::vector<size_t>& disc, std::vector<size_t>& low, std::stack<size_t>& st, std::vector<bool>& stackMember) const {
+    static size_t time=0;
+    disc[currentVertex]=low[currentVertex]=++time;
+    st.push(currentVertex);
+    stackMember[currentVertex]=true;
+    std::vector<const size_t>::iterator it;
+    for (it = adj[currentVertex].begin(); it != adj[currentVertex].end(); it++) {
+        size_t neighbour = *it;
+        if(disc[neighbour] == -1) {
+            SCC_Tarjan_helper(neighbour, disc, low, st, stackMember);
+            low[currentVertex] = std::min(low[currentVertex], low[neighbour]);
+        }
+        else if(stackMember[neighbour] == true) {
+            low[currentVertex] = std::min(low[currentVertex], disc[neighbour]);
+        }
+    }
+    size_t x=0;
+    if(low[currentVertex] == disc[currentVertex]) {
+        while(st.top() != currentVertex) {
+            x = st.top();
+            std::cout<<x<<" ";
+            stackMember[x]=false;
+            st.pop();
+        }
+        x = st.top();
+        std::cout<<x<<'\n';
+        stackMember[x]=false;
+        st.pop();
+    }
+}
+
+void Graph::SCC_Tarjan() const {
+    std::vector<size_t> disc(V, SIZE_T_MAX);
+    std::vector<size_t> low(V, SIZE_T_MAX);
+    std::vector<bool> stackMember(V, false);
+    std::stack<size_t> st;
+    for (size_t i = 0; i < V; i++) {
+        if(disc[i] == SIZE_T_MAX) {
+            SCC_Tarjan_helper(i, disc, low, st, stackMember);
+        }
+    }
 }

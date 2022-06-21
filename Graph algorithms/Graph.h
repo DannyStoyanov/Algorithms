@@ -2,6 +2,7 @@
 #include <vector>
 #include <queue>
 #include <assert.h>
+#include <stack>
 
 enum Color {
     white,
@@ -11,7 +12,7 @@ enum Color {
 
 class Graph {
     private:
-	    std::vector<std::vector<int> > adj;
+	    std::vector<std::vector<size_t> > adj;
 	    std::size_t V;
 	    bool oriented;
 
@@ -20,6 +21,7 @@ class Graph {
         void SCC_rec(std::vector<size_t>& set, size_t currentVertex, std::vector<Color>& color, std::vector<size_t>& dist, size_t time) const;
         void SCC(std::vector<size_t>& l) const;
         bool hasCycle_helper(size_t currentVertex, std::vector<bool>& visited, std::vector<bool>& stack) const;
+        void SCC_Tarjan_helper(size_t currentVertex, std::vector<size_t>& disc, std::vector<size_t>& low, std::stack<size_t>& st, std::vector<bool>& stackMember) const;
     public:
         Graph();
         Graph(size_t _V, bool _oriented);
@@ -32,6 +34,7 @@ class Graph {
         std::vector<size_t> TopoSort_Tarjan() const; // Tarjan's Topological Sorting algorithm
         std::vector<size_t> TopoSort_Kahn() const; // Kahn's Topologiacl Sorting algorithm
         void SCC_Kosaraju() const;
+        void SCC_Tarjan() const;
         Graph transpose() const;
         bool hasCycle() const;
 };
