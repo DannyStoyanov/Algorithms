@@ -16,3 +16,4 @@
 - Lomuto partition - O(n<sup>2</sup>)
 - 2SUM - O(n) (the input must be sorted)
 - 3SUM - O(n<sup>2</sup>)
+- Find the Missing Number - O(logn)
