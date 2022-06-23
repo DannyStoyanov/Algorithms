@@ -22,6 +22,7 @@ class Graph {
         void SCC(std::vector<size_t>& l) const;
         bool hasCycle_helper(size_t currentVertex, std::vector<bool>& visited, std::vector<bool>& stack) const;
         void SCC_Tarjan_helper(size_t currentVertex, std::vector<size_t>& disc, std::vector<size_t>& low, std::stack<size_t>& st, std::vector<bool>& stackMember) const;
+        size_t findCutVertices_helper(size_t currentVertex, size_t l, std::vector<size_t>& level, std::vector<Color>& color, size_t minback) const;
     public:
         Graph();
         Graph(size_t _V, bool _oriented);
@@ -37,6 +38,7 @@ class Graph {
         void SCC_Tarjan() const;
         Graph transpose() const;
         bool hasCycle() const;
+        size_t findCutVertices() const;
 };
 
 Graph::Graph(): V(0), adj(0), oriented(false) {}
@@ -322,4 +324,50 @@ void Graph::SCC_Tarjan() const {
             SCC_Tarjan_helper(i, disc, low, st, stackMember);
         }
     }
+}
+
+size_t Graph::findCutVertices_helper(size_t currentVertex, size_t l, std::vector<size_t>& level, std::vector<Color>& color, size_t minback) const {
+    color[currentVertex]=white;
+    level[currentVertex]=l;
+    minback=level[currentVertex];
+    bool isRoot=false;
+    if(level[currentVertex]==0) {
+        isRoot=true;
+    }
+    else {
+        isRoot=false;
+    }
+    int count=0;
+    bool isCutVertex=false;
+    for (size_t i = 0; i < adj[currentVertex].size(); i++) {
+        size_t neighbour = adj[currentVertex][i];
+        if(color[neighbour] == white) {
+            count++;
+            size_t b = findCutVertices_helper(neighbour, l+1, level, color, minback);
+            if(b >= level[currentVertex] && !(isRoot)) {
+                isCutVertex=true;
+            }
+            minback = std::min(minback, b);
+        }
+        if(color[neighbour] == gray) {
+            if((level[neighbour]<minback) && (level[neighbour]!=level[currentVertex]-1)) {
+                minback = std::min(minback, level[neighbour]);
+            }
+        }
+    }
+    if(isCutVertex || (isRoot && count >= 2)) {
+        std::cout<<currentVertex<<" ";
+    }
+    color[currentVertex]=black;
+    return minback;
+}
+
+size_t Graph::findCutVertices() const {
+    Color c = white;
+    std::vector<size_t> level(V, 0);
+    std::vector<Color> color(V, c);
+    size_t minback=SIZE_T_MAX;
+    // size_t v = adj.front().front();
+    size_t v = 0; // starting vertex;
+    findCutVertices_helper(v, 0, level, color, minback);
 }
