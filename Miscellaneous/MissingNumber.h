@@ -26,3 +26,18 @@ int missingNumber(int arr[], size_t size) {
     }
     return left;
 }
+
+// if array in not sorted
+int missingNumberV2(int arr[], size_t size) {
+    int arrSum=0;
+    int sum=0;
+    for (size_t i = 0; i < size; i++) {
+        arrSum += arr[i];
+        sum+=(i+1);
+    }
+    int result = sum-arrSum;
+    if(result < 0) {
+        return 0;
+    }
+    return result;
+}
