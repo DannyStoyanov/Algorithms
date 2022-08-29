@@ -12,3 +12,8 @@
 
 // n - number of vertices, |V| = n <br>
 // m - number of edges, |E| = m
+
+### Structures and classes
+- Union-Find:
+    - Time complexity: O(logn)
+    - Space complexity: O(n)
