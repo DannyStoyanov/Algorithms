@@ -14,6 +14,7 @@
 // m - number of edges, |E| = m
 
 ### Structures and classes
+- Graph
 - Union-Find:
     - Time complexity: O(logn)
     - Space complexity: O(n)

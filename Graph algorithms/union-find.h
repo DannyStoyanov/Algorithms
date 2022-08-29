@@ -11,7 +11,7 @@ size_t find(std::vector<size_t>& parent, size_t x) {
     if (parent[x] != x) {
         parent[x] = find(parent, parent[x]);
     }
-    return x;
+    return parent[x];
 }
  
 // uses union by rank

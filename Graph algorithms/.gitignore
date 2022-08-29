@@ -51,3 +51,4 @@ utilities.h
 mergeSort.h
 Graph.hpp
 *.hpp
+!UnionFind.hpp
